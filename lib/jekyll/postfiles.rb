@@ -68,13 +68,13 @@ module Jekyll
       #       cool.png               # yes, even deeply-nested files are eligible to be copied.
       def generate(site)
         site_srcroot = Pathname.new site.source
-        posts_src_dir = site_srcroot + "_posts"
+        posts_src_dir = site_srcroot + "_guide"
         drafts_src_dir = site_srcroot + "_drafts"
 
         # Jekyll.logger.warn("[PostFiles]", "_posts: #{posts_src_dir}")
         # Jekyll.logger.warn("[PostFiles]", "docs: #{site.posts.docs.map(&:path)}")
 
-        docs_with_dirs = site.posts.docs
+        docs_with_dirs = site.collections['guide'].docs
           .reject do |doc|
             Pathname.new(doc.path).dirname.instance_eval do |dirname|
               [posts_src_dir, drafts_src_dir].reduce(false) do |acc, dir|
